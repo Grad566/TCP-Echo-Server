@@ -17,7 +17,7 @@ public class EchoServer {
         this.executor = executor;
     }
 
-    public void start() {
+    public void start () throws IOException {
         try (ServerSocket socket = new ServerSocket(port)) {
             while (true) {
                 Socket clientSocket = socket.accept();

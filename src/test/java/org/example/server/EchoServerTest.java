@@ -23,7 +23,13 @@ class EchoServerTest {
     public void setUp() {
         executor = Executors.newFixedThreadPool(10);
         server = new EchoServer(9091, executor);
-        thread = new Thread(() -> server.start());
+        thread = new Thread(() -> {
+            try {
+                server.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         thread.start();
     }
 
@@ -45,4 +51,5 @@ class EchoServerTest {
             assertEquals(message, response);
         }
     }
+
 }
